@@ -131,3 +131,16 @@ window.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+function toggleFormularioEvento() {
+  const form = document.getElementById("formulario-evento");
+  const botao = document.getElementById("botao-toggle-form");
+
+  if (form.style.display === "none" || form.style.display === "") {
+    form.style.display = "block";
+    botao.textContent = "×"; // muda o botão para X
+    form.scrollIntoView({ behavior: "smooth" });
+  } else {
+    form.style.display = "none";
+    botao.textContent = "+";
+  }
+}

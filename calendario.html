@@ -21,25 +21,8 @@
     </nav>
 
     <main class="conteudo">
-      <!-- Calendário -->
-      <div class="container-calendario">
-        <!-- Controle de mês -->
-        <div class="controle-mes">
-          <button onclick="mudarMes(-1)">◀</button>
-          <h2 id="titulo-mes">Março 2025</h2>
-          <button onclick="mudarMes(1)">▶</button>
-        </div>
+      <div class="painel-principal">
 
-        <div class="calendario" id="calendario"></div>
-
-        <div class="adicionar-evento">
-          <h3>Adicionar novos eventos</h3>
-          <a href="adicionar.html" class="botao-mais">+</a>
-        </div>
-      </div> 
-      
-      <div class="bloco-principal">
-        <!-- Tabela de Eventos -->
         <div class="eventos-lado">
           <h3>Próximos Eventos</h3>
           <table class="tabela-eventos">
@@ -51,6 +34,49 @@
             </thead>
             <tbody id="corpo-tabela-eventos"></tbody>
           </table>
+        </div>
+
+        <div class="container-calendario">
+          <div class="controle-mes">
+            <button onclick="mudarMes(-1)">◀</button>
+            <h2 id="titulo-mes">Março 2025</h2>
+            <button onclick="mudarMes(1)">▶</button>
+          </div>
+
+          <div class="calendario" id="calendario"></div>
+
+          <div class="adicionar-evento">
+            <button id="botao-toggle-form" onclick="toggleFormularioEvento()" class="botao-mais">+</button>
+          </div>
+        </div>
+
+        <div class="form-wrapper" id="formulario-evento" style="display: none;">
+          <h3>Adicionar Novo Evento</h3>
+          <form id="form-cadastro" class="form-evento">
+            <label for="evento">Nome do Evento:</label>
+            <select id="evento" name="evento" required>
+              <option value="">Selecione</option>
+              <option value="Cozinha">Cozinha</option>
+              <option value="Segurança">Segurança</option>
+              <option value="Caixa">Caixa</option>
+              <option value="Limpeza">Limpeza</option>
+            </select>
+
+            <label for="data">Data do Evento:</label>
+            <input type="date" id="data" name="data" required>
+
+            <label for="vagas">Quantidade de Vagas:</label>
+            <select id="vagas" name="vagas" required>
+              <option value="">Selecione</option>
+              <option value="1">1 vaga</option>
+              <option value="2">2 vagas</option>
+              <option value="3">3 vagas</option>
+              <option value="4">4 vagas</option>
+              <option value="5">5 vagas</option>
+            </select>
+
+            <button type="submit">Adicionar Evento</button>
+          </form>
         </div>
 
       </div>
