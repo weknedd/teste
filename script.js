@@ -144,3 +144,99 @@ function toggleFormularioEvento() {
     botao.textContent = "+";
   }
 }
+
+function toggleMenu() {
+  const menu = document.querySelector(".menu-lateral");
+  const botao = document.querySelector(".botao-menu");
+  const overlay = document.querySelector(".overlay");
+  const body = document.body; // novo
+
+  menu.classList.toggle("aberto");
+  body.classList.toggle("menu-aberto"); // novo
+
+  if (menu.classList.contains("aberto")) {
+    botao.textContent = "✖";
+    overlay.classList.add("ativo");
+  } else {
+    botao.textContent = "☰";
+    overlay.classList.remove("ativo");
+  }
+}
+
+
+// Fecha o menu clicando fora
+document.addEventListener("click", function(event) {
+  const menu = document.querySelector(".menu-lateral");
+  const botao = document.querySelector(".botao-menu");
+  const overlay = document.querySelector(".overlay");
+
+  if (menu.classList.contains("aberto")) {
+    if (!menu.contains(event.target) && !botao.contains(event.target)) {
+      menu.classList.remove("aberto");
+      botao.textContent = "☰";
+      overlay.classList.remove("ativo");
+    }
+  }
+});
+
+const descricoes = {
+  projeto: {
+    titulo: 'ABCLabs Consultoria',
+    texto: 'A ABCLabs Consultoria é uma empresa que atua na área de tecnologia, oferecendo soluções inovadoras para o mercado. O projeto desenvolvido pela equipe tem como foco a criação de um sistema de gerenciamento de eventos, visando facilitar a organização e o controle de atividades em empresas e instituições. Através de um calendário dinâmico e interativo, os usuários poderão visualizar, adicionar e gerenciar eventos de forma prática e eficiente.',
+    links: ''
+  },
+  dev1: {
+    titulo: 'Ariel da Silva Alves',
+    texto: 'Um dos pilares da equipe, com uma sólida formação em Desenvolvimento de Software e uma paixão por criar soluções inovadoras. Ele é o responsável pela arquitetura do sistema, garantindo que o software seja robusto, seguro e escalável. Com experiência em diversas linguagens de programação e frameworks, Ariel lidera a parte técnica do projeto, orientando os membros do time na implementação das funcionalidades mais complexas. Sua habilidade em análise de sistemas e seu comprometimento com a qualidade técnica fazem dele um integrante indispensável na CLAB Consultoria.',
+    links: `
+      <a href="https://www.linkedin.com/in/ariel-s-alves-715a97268/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+      <a href="mailto:ariel.alves@fatec.sp.gov.br"><i class="fas fa-envelope"></i> E-mail</a>
+    `
+  },
+  dev2: {
+    titulo: 'Brenda Cristina de Souza',
+    texto: 'Traz para o projeto sua experiência em gestão de projetos e análise de negócios. Ele é o responsável por entender as necessidades do cliente e traduzir essas demandas em requisitos técnicos claros. Chrystian coordena as etapas do desenvolvimento, mantendo o time focado nos objetivos do projeto e assegurando que os prazos e a qualidade sejam cumpridos. Sua habilidade de comunicação e organização são essenciais para o sucesso do projeto, além de ser um elo importante entre a CLAB Consultoria e a Arena Vinci.',
+    links: `
+      <a href="https://www.linkedin.com/in/brenda-cristina2607/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+      <a href="mailto:brenda.souza16@fatec.sp.gov.br"><i class="fas fa-envelope"></i> E-mail</a>
+    `
+  },
+  dev3: {
+    titulo: 'Chrystian Mauricio Carvalho Oliveira',
+    texto: 'É o especialista em banco de dados e integração de sistemas. Ela é responsável por garantir que todas as informações no software sejam armazenadas de maneira eficiente, segura e acessível. Além disso, Larissa trabalha para integrar o software com outras plataformas e sistemas utilizados pela Arena Vinci, garantindo que as operações fluam sem interrupções. Com seu conhecimento profundo em SQL e otimização de banco de dados, Larissa assegura que o sistema seja capaz de lidar com grandes volumes de dados e transações, mantendo a performance do sistema em alta.',
+    links: `
+      <a href="https://www.linkedin.com/in/chrystianoliveira/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+      <a href="mailto:chrystian.oliveira@fatec.sp.gov.br"><i class="fas fa-envelope"></i> E-mail</a>
+    `
+  },
+  dev4: {
+    titulo: 'Larissa Semede Ferreira',
+    texto: 'É a especialista em UX/UI do time, responsável pela criação de interfaces intuitivas e agradáveis aos usuários. Com uma visão focada na experiência do usuário, ela trabalha para garantir que o software seja fácil de usar, mesmo para aqueles com pouca familiaridade com tecnologia. Larissa realiza pesquisas de usabilidade, prototipa telas e colabora com o desenvolvimento de interações, sempre com o objetivo de otimizar a experiência do usuário final. Sua criatividade e atenção aos detalhes fazem dela a líder na parte de design do projeto.',
+    links: `
+      <a href="https://www.linkedin.com/in/larissa-semede-3a4935272/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+      <a href="mailto:larissa.ferreira21@fatec.sp.gov.br"><i class="fas fa-envelope"></i> E-mail</a>
+    `
+  },
+  arena: {
+    titulo: 'Arena Vinci',
+    texto: 'Arena Vinci Esportes é um espaço moderno e acolhedor, dedicado à prática de atividades esportivas, recreativas e eventos. Com estrutura completa e atendimento de excelência, a Arena Vinci busca promover qualidade de vida, lazer e integração social, atendendo públicos de todas as idades. Nosso compromisso é oferecer experiências únicas em um ambiente seguro, dinâmico e preparado para o seu bem-estar.',
+    links: `
+      <a href="https://www.linkedin.com/in/larissa-semede-3a4935272/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> |
+      <a href="mailto:larissa.ferreira21@fatec.sp.gov.br"><i class="fas fa-envelope"></i> E-mail</a>
+    `
+  }
+};
+
+function abrirDescricao(id) {
+const titulo = document.getElementById('titulo-descricao');
+const texto = document.getElementById('texto-descricao');
+const descricaoCard = document.getElementById('descricao-card');
+
+titulo.textContent = descricoes[id].titulo;
+texto.textContent = descricoes[id].texto;
+
+// Mostra o card se estava oculto
+descricaoCard.style.display = 'block';
+
+descricaoCard.scrollIntoView({ behavior: 'smooth' });
+}
