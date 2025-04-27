@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendário</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="layout">
+    <nav class="menu-lateral">
+      <h3>Menu</h3>
+      <ul>
+        <li><a href="#">Início</a></li>
+        <li><a href="#">Calendário</a></li>
+        <li><a href="#">Relatórios</a></li>
+        <li><a href="#">Configurações</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="#" onclick="sair(); toggleMenu()">Sair</a></li>
+      </ul>
+    </nav>
+
+    <main class="conteudo">
+      <!-- Calendário -->
+      <div class="container-calendario">
+        <!-- Controle de mês -->
+        <div class="controle-mes">
+          <button onclick="mudarMes(-1)">◀</button>
+          <h2 id="titulo-mes">Março 2025</h2>
+          <button onclick="mudarMes(1)">▶</button>
+        </div>
+
+        <div class="calendario" id="calendario"></div>
+
+        <div class="adicionar-evento">
+          <h3>Adicionar novos eventos</h3>
+          <a href="adicionar.html" class="botao-mais">+</a>
+        </div>
+      </div> 
+      
+      <div class="bloco-principal">
+        <!-- Tabela de Eventos -->
+        <div class="eventos-lado">
+          <h3>Próximos Eventos</h3>
+          <table class="tabela-eventos">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Vaga</th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela-eventos"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
