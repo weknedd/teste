@@ -1,8 +1,9 @@
-body {
-  background-color: #003366;
+body { 
+  background-color: white;
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
+  
 }
 
 /* torna a área principal branca */
@@ -10,11 +11,15 @@ body {
   background-color: white;
   min-height: 100vh;
   display: flex;
+  
 }
-
 
 /* LOGIN */
 .login-container {
+  background-image: url('imgarena.jpg');
+  background-position: no-repeat;
+  background-position: center;
+  background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,44 +27,55 @@ body {
   padding-right: 50px;
 }
 
+
 .login-box {
   background-color: white;
-  padding: 30px;
+  padding: 10px;
   border-radius: 15px;
-  width: 300px;
+  width: 280px;
   text-align: center;
   box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 .login-box img.logo {
-  width: 200px;
+  width: 250px;
   height: auto;
   margin-bottom: 20px;
 }
 
+.login-title {
+  text-align: left; /* Alinha para a esquerda */
+  margin-top: -40px;
+  margin-left: 20px; /* Empurra o texto um pouco da borda */
+
+
+}
+
 .login-box input {
-  width: 100%;
-  padding: 10px;
+  width: 90%;
+  padding: 12px;
   margin: 10px 0;
   border: 1px solid #ccc;
   border-radius: 80px;
 }
 
 .login-box button {
-  width: 100%;
+  width: 50%;
   padding: 10px;
   background-color: #003366;
   color: white;
   border: none;
   border-radius: 80px;
   cursor: pointer;
-  margin-top: 10px;
+  margin-top: 40px;
+  margin-bottom: 30px;
 }
 
 .login-box .esqueci-senha {
   background: none;
   color: #003366;
   text-decoration: underline;
+  margin-bottom: 60px;
   margin-top: 10px;
 }
 
@@ -73,24 +89,25 @@ body {
 
 .menu-lateral {
   width: 100px;
-  background-color: #003366;
+  background-color: #0e2b47;
   color: white;
-  padding: 20px;
+  padding: 30px;
 }
 
 .menu-lateral h3 {
-  margin-top: 0;
+  margin-top: 20;
 }
 
 .menu-lateral ul {
   list-style: none;
-  padding: 0;
+  padding: 0px;
 }
 
 .menu-lateral ul li {
-  margin-bottom: 10px;
+  margin-bottom: 25px;
 }
 
+/*texto lateral menu */
 .menu-lateral ul li a {
   color: white;
   text-decoration: none;
@@ -103,7 +120,7 @@ body {
 .conteudo {
   flex: 1;
   padding: 30px;
-  background-color: white;
+background-color: #f0f0f0;
   color: black;
   display: flex;
   flex-direction: column;
