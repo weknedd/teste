@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Configurações</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button class="botao-menu" onclick="toggleMenu()">☰</button>
+  <div class="overlay"></div>
+
+  <div class="layout">
+    <nav class="menu-lateral">
+      <h3>Menu</h3>
+      <ul>
+        <li><a href="calendario.html">Calendário</a></li>
+        <li><a href="relatorios.html">Relatórios</a></li>
+        <li><a href="configuracoes.html">Configurações</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="#" onclick="sair(); toggleMenu()">Sair</a></li>
+      </ul>
+    </nav>
+
+    <main class="conteudo">
+      <div class="config-container">
+        <div class="foto-usuario">
+          <img src="adriano.jpg" alt="Foto do Usuário">
+        </div>
+        <h2 class="nome-usuario">Adriano Cilhos Doimo</h2>
+
+        <div class="config-opcao">
+            <label for="notificacoes-toggle">Notificações:</label>
+            <label class="switch">
+              <input type="checkbox" id="notificacoes-toggle">
+              <span class="slider"></span>
+            </label>
+          </div>          
+
+        <button class="botao-suporte">Entrar em Contato com o Suporte</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
