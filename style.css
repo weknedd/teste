@@ -16,7 +16,7 @@ body {
 
 /* LOGIN */
 .login-container {
-  background-image: url('imgarena.jpg');
+  background-image: url('/Imagens/imgarena.jpg');
   background-position: no-repeat;
   background-position: center;
   background-size: cover;
@@ -422,14 +422,12 @@ body {
 
 .painel-principal {
   display: flex;
-  flex-wrap: nowrap; /* Agora não deixa quebrar a linha */
+  flex-wrap: block;
   justify-content: center;
-  align-items: flex-start;
   gap: 30px;
-  width: 100%;
   margin-top: 20px;
+  width: 100%;
 }
-
 
 /* Cada bloco */
 .eventos-lado {
