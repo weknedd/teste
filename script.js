@@ -1,7 +1,7 @@
 function entrar(event) {
   event.preventDefault();
 
-  const cpf = document.getElementById("cpf").value.trim();
+  const cpf = document.getElementById("cpf").value.trim().replace(/\D/g, ""); // remove pontuação
   const senha = document.getElementById("senha").value;
 
   if (!/^\d{11}$/.test(cpf)) {
@@ -14,9 +14,14 @@ function entrar(event) {
     return;
   }
 
-  // ✅ Aqui é onde ele tenta abrir o calendário:
-  window.location.href = "calendario.html";
+  // Redirecionamento com base no CPF
+  if (cpf === "11122233344") {
+    window.location.href = "calendario.html"; // Administrador
+  } else {
+    window.location.href = "calendario-participante.html"; // Participante
+  }
 }
+
 // Eventos cadastrados
 const eventos = {
   "2025-04-05": "Caixa",
@@ -103,18 +108,30 @@ function adicionarEventoNaTabela(data, descricao) {
   const corpoTabela = document.getElementById("corpo-tabela-eventos");
   corpoTabela.innerHTML = "";
 
+  // Detecta se está na página do participante
+  const ehParticipante = window.location.pathname.includes("calendario-participante.html");
+
   if (Array.isArray(descricao)) {
     descricao.forEach(desc => {
       const tr = document.createElement("tr");
-      tr.innerHTML = `<td>${formatarData(data)}</td><td>${desc}</td>`;
+      tr.innerHTML = `
+        <td>${formatarData(data)}</td>
+        <td>${desc}</td>
+        ${ehParticipante ? `<td><button onclick="participar('${data}', '${desc}')">Quero Participar</button></td>` : ""}
+      `;
       corpoTabela.appendChild(tr);
     });
   } else {
     const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${formatarData(data)}</td><td>${descricao}</td>`;
+    tr.innerHTML = `
+      <td>${formatarData(data)}</td>
+      <td>${descricao}</td>
+      ${ehParticipante ? `<td><button onclick="participar('${data}', '${descricao}')">Quero Participar</button></td>` : ""}
+    `;
     corpoTabela.appendChild(tr);
   }
 }
+
 
 function formatarData(dataStr) {
   const [ano, mes, dia] = dataStr.split("-");
@@ -239,4 +256,69 @@ texto.textContent = descricoes[id].texto;
 descricaoCard.style.display = 'block';
 
 descricaoCard.scrollIntoView({ behavior: 'smooth' });
+}
+
+function adicionarEventoParaParticipante(data, descricao) {
+  const corpoTabela = document.getElementById("corpo-tabela-eventos");
+  corpoTabela.innerHTML = "";
+
+  if (Array.isArray(descricao)) {
+    descricao.forEach(desc => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${formatarData(data)}</td>
+        <td>${desc}</td>
+        <td><button onclick="candidatar('${data}', '${desc}')">Quero Participar</button></td>
+      `;
+      corpoTabela.appendChild(tr);
+    });
+  } else {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${formatarData(data)}</td>
+      <td>${descricao}</td>
+      <td><button onclick="candidatar('${data}', '${descricao}')">Quero Participar</button></td>
+    `;
+    corpoTabela.appendChild(tr);
+  }
+}
+
+function candidatar(data, vaga) {
+  alert(`Candidatura registrada para ${vaga} no dia ${formatarData(data)}!`);
+}
+
+// Detecta se é a tela do participante e troca a função de clique
+window.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("calendario")) {
+    carregarCalendario();
+
+    // Substitui eventos de clique no calendário para participantes
+    if (window.location.pathname.includes("calendario-participante.html")) {
+      const dias = document.querySelectorAll(".dia");
+      dias.forEach(diaEl => {
+        diaEl.onclick = null; // remove handler antigo
+      });
+
+      // Reatribui usando a função para participante
+      document.querySelectorAll(".dia").forEach(div => {
+        const diaNum = div.textContent.trim();
+        if (!diaNum || isNaN(diaNum)) return;
+
+        const dataStr = `${anoAtual}-${(mesAtual + 1).toString().padStart(2, "0")}-${diaNum.padStart(2, "0")}`;
+
+        div.addEventListener("click", () => {
+          const evento = eventos[dataStr];
+          if (evento) {
+            adicionarEventoParaParticipante(dataStr, evento);
+          } else {
+            alert("Nenhum evento para esta data.");
+          }
+        });
+      });
+    }
+  }
+});
+
+function participar(data, vaga) {
+  alert(`Você se candidatou para a vaga de "${vaga}" no dia ${formatarData(data)}.`);
 }

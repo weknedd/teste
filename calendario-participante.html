@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Calendário - Participante</title>
+  <link rel="icon" type="image/png" href="icone.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <button class="botao-menu" onclick="toggleMenu()">☰</button>
+  <div class="layout">
+    <nav class="menu-lateral">
+        <br>
+      <h3>Menu</h3>
+      <ul>
+        <li><a href="#">Meu perfil</a></li>
+        <li><a href="#">Calendário</a></li>
+        <li><a href="#">Relatórios</a></li>
+        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="#" onclick="sair(); toggleMenu()">Sair</a></li>
+      </ul>
+    </nav>
+
+    <main class="conteudo">
+      <div class="painel-principal">
+
+        <!-- Tabela de eventos -->
+        <div class="eventos-lado">
+          <h3>Próximos Eventos</h3>
+          <table class="tabela-eventos">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th>Vaga</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody id="corpo-tabela-eventos"></tbody>
+          </table>
+        </div>
+
+        <!-- Calendário -->
+        <div class="container-calendario">
+          <div class="controle-mes">
+            <button onclick="mudarMes(-1)">◀</button>
+            <h2 id="titulo-mes">Abril 2025</h2>
+            <button onclick="mudarMes(1)">▶</button>
+          </div>
+
+          <div class="calendario" id="calendario"></div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <div class="overlay"></div>
+  <script src="script.js"></script>
+</body>
+</html>
