@@ -117,7 +117,7 @@ function adicionarEventoNaTabela(data, descricao) {
       tr.innerHTML = `
         <td>${formatarData(data)}</td>
         <td>${desc}</td>
-        ${ehParticipante ? `<td><button onclick="participar('${data}', '${desc}')">Quero Participar</button></td>` : ""}
+        ${ehParticipante ? `<td><button onclick="participar('${data}', '${desc}')">Tenho interesse</button></td>` : ""}
       `;
       corpoTabela.appendChild(tr);
     });
@@ -126,7 +126,7 @@ function adicionarEventoNaTabela(data, descricao) {
     tr.innerHTML = `
       <td>${formatarData(data)}</td>
       <td>${descricao}</td>
-      ${ehParticipante ? `<td><button onclick="participar('${data}', '${descricao}')">Quero Participar</button></td>` : ""}
+      ${ehParticipante ? `<td><button onclick="participar('${data}', '${descricao}')">Tenho interesse</button></td>` : ""}
     `;
     corpoTabela.appendChild(tr);
   }
@@ -268,7 +268,7 @@ function adicionarEventoParaParticipante(data, descricao) {
       tr.innerHTML = `
         <td>${formatarData(data)}</td>
         <td>${desc}</td>
-        <td><button onclick="candidatar('${data}', '${desc}')">Quero Participar</button></td>
+        <td><button onclick="candidatar('${data}', '${desc}')">Tenho interesse</button></td>
       `;
       corpoTabela.appendChild(tr);
     });
@@ -277,7 +277,7 @@ function adicionarEventoParaParticipante(data, descricao) {
     tr.innerHTML = `
       <td>${formatarData(data)}</td>
       <td>${descricao}</td>
-      <td><button onclick="candidatar('${data}', '${descricao}')">Quero Participar</button></td>
+      <td><button onclick="candidatar('${data}', '${descricao}')">Tenho interesse</button></td>
     `;
     corpoTabela.appendChild(tr);
   }
