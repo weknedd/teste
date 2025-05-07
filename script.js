@@ -22,15 +22,15 @@ function entrar(event) {
   }
 }
 
-// Eventos cadastrados
+// Eventos cadastrados ***TROCAR PARA PEGAR AUTOMATICAMENTE VIA PHP***
 const eventos = {
-  "2025-04-05": "Caixa",
-  "2025-04-12": ["Segurança", "Cozinha", "Estoque"],
-  "2025-04-25": ["Segurança", "Cozinha", "Estoque"]
+  "2025-05-05": "Caixa",
+  "2025-05-12": ["Segurança", "Cozinha", "Estoque"],
+  "2025-05-25": ["Segurança", "Cozinha", "Estoque"]
 };
 
 // Variáveis globais de controle de mês
-let mesAtual = 3; // Março (0 = janeiro)
+let mesAtual = 4;
 let anoAtual = 2025;
 
 const nomesMeses = [

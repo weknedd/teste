@@ -35,11 +35,14 @@
               <tr>
                 <th>Data</th>
                 <th>Vaga</th>
+                <th>Turno</th>
               </tr>
             </thead>
             <tbody id="corpo-tabela-eventos"></tbody>
-          </table>
+          </table>  
         </div>
+
+        
 
         <!-- Bloco 2: Calendário -->
         <div class="container-calendario">
@@ -56,13 +59,12 @@
           </div>
         </div>
 
-        <!-- Bloco 3: Formulário -->
+        <!-- Formulário de lançamento de um  novo evento -->
         <div class="form-wrapper" id="formulario-evento" style="display: none;">
           <h3>Adicionar Novo Evento</h3>
           <form id="form-cadastro" class="form-evento">
             <label for="evento">Nome do Evento:</label>
             <select id="evento" name="evento" required>
-              <option value="">Selecione</option>
               <option value="Cozinha">Cozinha</option>
               <option value="Segurança">Segurança</option>
               <option value="Caixa">Caixa</option>
@@ -74,7 +76,6 @@
 
             <label for="vagas">Quantidade de Vagas:</label>
             <select id="vagas" name="vagas" required>
-              <option value="">Selecione</option>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -82,6 +83,12 @@
               <option value="5">5</option>
             </select>
 
+            <label for="vagas">Selecione o turno:</label>
+            <select id="turno" name="turno" required>
+              <option value="Manhã">Manhã</option>
+              <option value="Tarde">Tarde</option>
+              <option value="O dia todo">O dia todo</option>
+            </select>
             <button type="submit">Adicionar Evento</button>
           </form>
         </div>
