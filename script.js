@@ -18,7 +18,7 @@ function entrar(event) {
   if (cpf === "11122233344") {
     window.location.href = "calendario.html"; // Administrador
   } else {
-    window.location.href = "calendario-participante.html"; // Participante
+    window.location.href = "calendario-participante.html"; // Qualquer outro usuário
   }
 }
 

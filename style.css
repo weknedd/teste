@@ -8,10 +8,28 @@ body {
 
 /* torna a área principal branca */
 .layout {
-  background-color: white;
-  min-height: 100vh;
+  position: relative;
+  background-image: url('/Imagens/imgarena.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   display: flex;
-  
+  background-color: white;
+}
+
+/* Camada semi-transparente sobre o background */
+.layout::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8); /* branco com 50% opacidade */
+  z-index: 1;
+}
+
+/* Conteúdo da .layout deve ficar acima da camada */
+.layout > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* LOGIN */
@@ -190,7 +208,7 @@ body {
   padding: 30px;
   max-width: 1200px; /* Limita o tamanho máximo */
   margin: 20px auto; /* Centraliza na horizontal */
-  background-color: white;
+  /*background-color: white;*/
   color: black;
   display: flex;
   flex-direction: column;
