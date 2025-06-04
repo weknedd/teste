@@ -12,11 +12,11 @@
     <nav class="menu-lateral">
       <h3>Menu</h3>
       <ul>
-        <li><a href="#">Início</a></li>
-        <li><a href="#">Calendário</a></li>
-        <li><a href="#">Relatórios</a></li>
-        <li><a href="#">Configurações</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="index.php"> </a></li>
+        <li><a href="calendario.php">Calendário</a></li>
+        <li><a href="relatorios.php">Relatórios</a></li>
+        <li><a href="configuracoes.php">Configurações</a></li>
+        <li><a href="sobre.php">Sobre</a></li>
         <li><a href="#" onclick="sair(); toggleMenu()">Sair</a></li>
       </ul>
     </nav>
@@ -45,6 +45,7 @@
             <button onclick="mudarMes(-1)">◀</button>
             <h2 id="titulo-mes">Março 2025</h2>
             <button onclick="mudarMes(1)">▶</button>
+            
           </div>
 
           <div class="calendario" id="calendario"></div>
@@ -54,31 +55,21 @@
     </main>
   </div>
 
-  <!-- Formulário para candidatura -->
-  <div class="form-participante" id="formulario-candidatura" style="display: none;">
-    <h3>Confirmar Candidatura</h3>
-    <form id="form-candidatura" class="form-evento">
-      
-      <label for="vaga-candidatura">Vaga:</label>
-      <select id="vaga-candidatura" name="vaga-candidatura" required>
-        <option value="">Selecione</option>
-        <option value="Cozinha">Cozinha</option>
-        <option value="Segurança">Segurança</option>
-        <option value="Caixa">Caixa</option>
-        <option value="Limpeza">Limpeza</option>
-      </select>
-
-      <label for="turno">Turno:</label>
-      <select id="turno" name="turno" required>
-        <option value="Manhã">Manhã</option>
-        <option value="Tarde">Tarde</option>
-        <option value="Dia Todo">Dia Todo</option>
-      </select>
-
-      <button type="submit">Confirmar Candidatura</button>
+  <div class="container">
+    <h1>Buscar Eventos</h1>
+    
+    <!-- Formulário para buscar eventos -->
+    <form method="POST">
+      <label for="data">Selecione a Data:</label>
+      <input type="date" name="data" id="data" required>
+      <button type="submit">Buscar</button>
     </form>
-  </div>
 
+    <div id="resultados">
+      <!-- Aqui serão exibidos os eventos -->
+    </div>
+  </div>
   <script src="script.js"></script>
+
 </body>
 </html>

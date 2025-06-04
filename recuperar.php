@@ -9,13 +9,13 @@
 <body>
   <div class="login-container">
     <div class="login-box">
-      <img src="/Imagens/logo_branca.jpg" alt="Logo da Empresa" class="logo">
+      <img src="http://localhost/meu-projeto/Projeto%20Integrador/Imagens/logo_branca.jpg" alt="Logo da Empresa" class="logo">
       <h2>Recuperar Senha</h2>
       <form onsubmit="solicitarReset(event)">
         <input type="text" id="cpf-reset" placeholder="CPF cadastrado" required minlength="11" maxlength="11">
         <input type="email" id="email-reset" placeholder="E-mail cadastrado" required>
         <button type="submit">Solicitar reset de senha</button>
-        <a href="login.html" class="link-voltar">Sair</a>
+        <a href="login.php" class="link-voltar">Sair</a>
       </form>
     </div>
   </div>

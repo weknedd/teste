@@ -11,7 +11,7 @@
     <div class="login-box">
    
         
-      <img src="/Imagens/logo_branca.jpg" alt="Logo da Empresa" class="logo">
+      <img src="http://localhost/meu-projeto/Projeto%20Integrador/Imagens/logo_branca.jpg" alt="Logo da Empresa" class="logo">
    
      
    
@@ -22,7 +22,7 @@
         <input type="password" id="senha" placeholder="Senha">
         <button type="submit">Entrar</button>
       </form>
-      <a href="recuperar.html" class="esqueci-senha">Esqueci minha senha</a>
+      <a href="recuperar.php" class="esqueci-senha">Esqueci minha senha</a>
     </div>
   </div>
 </div>

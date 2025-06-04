@@ -14,10 +14,10 @@
     <br>
       <h3>Menu</h3>
       <ul>
-        <li><a href="calendario.html">Calendário</a></li>
-        <li><a href="relatorios.html">Relatórios</a></li>
-        <li><a href="configuracoes.html">Configurações</a></li>
-        <li><a href="sobre.html">Sobre</a></li>
+        <li><a href="calendario.php">Calendário</a></li>
+        <li><a href="relatorios.php">Relatórios</a></li>
+        <li><a href="configuracoes.php">Configurações</a></li>
+        <li><a href="sobre.php">Sobre</a></li>
         <li><a href="#" onclick="sair(); toggleMenu()">Sair</a></li>
       </ul>
     </nav>
@@ -25,7 +25,7 @@
     <main class="conteudo">
       <div class="config-container">
         <div class="foto-usuario">
-          <img src="/Imagens/adriano.jpg" alt="Foto do Usuário">
+          <img src="http://localhost/meu-projeto/Projeto%20Integrador/Imagens/adriano.jpg" alt="Foto do Usuário">
         </div>
         <h2 class="nome-usuario">Adriano Cilhos Doimo</h2>
 

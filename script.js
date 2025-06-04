@@ -16,18 +16,11 @@ function entrar(event) {
 
   // Redirecionamento com base no CPF
   if (cpf === "11122233344") {
-    window.location.href = "calendario.html"; // Administrador
+    window.location.href = "calendario.php"; // Administrador
   } else {
-    window.location.href = "calendario-participante.html"; // Qualquer outro usuário
+    window.location.href = "calendario-participante.php"; // Qualquer outro usuário
   }
 }
-
-// Eventos cadastrados ***TROCAR PARA PEGAR AUTOMATICAMENTE VIA PHP***
-const eventos = {
-  "2025-05-05": "Caixa",
-  "2025-05-12": ["Segurança", "Cozinha", "Estoque"],
-  "2025-05-25": ["Segurança", "Cozinha", "Estoque"]
-};
 
 // Variáveis globais de controle de mês
 let mesAtual = 4;
@@ -38,6 +31,7 @@ const nomesMeses = [
   "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
 ];
 
+// Função para carregar o calendário com os eventos
 function carregarCalendario() {
   const calendario = document.getElementById("calendario");
   calendario.innerHTML = "";
@@ -66,29 +60,44 @@ function carregarCalendario() {
     const dataStr = `${anoAtual}-${(mesAtual + 1).toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}`;
     div.innerHTML = `<div>${dia}</div>`;
 
-    const hoje = new Date();
-    const dataHojeStr = `${hoje.getFullYear()}-${(hoje.getMonth() + 1).toString().padStart(2, "0")}-${hoje.getDate().toString().padStart(2, "0")}`;
-    if (dataStr === dataHojeStr) {
-      div.classList.add("dia-hoje");
-    }
-
-    if (eventos[dataStr]) {
-      const icone = document.createElement("div");
-      icone.className = "icone-evento";
-      icone.textContent = "🟢";
-      div.appendChild(icone);
-    }
-
-    div.addEventListener("click", () => {
-      const evento = eventos[dataStr];
-      if (evento) {
-        adicionarEventoNaTabela(dataStr, evento);
-      } else {
-        alert("Nenhum evento para esta data.");
-      }
+    div.addEventListener("click", function() {
+      // Quando o usuário clica em um dia, chama a função para buscar os eventos
+      buscarEventos(dataStr);
     });
 
     calendario.appendChild(div);
+  }
+}
+
+function buscarEventos(data) {
+  // Faz uma requisição AJAX para buscar os eventos do banco
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "buscar_eventos.php?data=" + data, true);
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState == 4 && xhr.status == 200) {
+      const eventos = JSON.parse(xhr.responseText); // Supondo que a resposta seja um JSON com os eventos
+      exibirEventos(eventos);
+    }
+  };
+  xhr.send();
+}
+
+function exibirEventos(eventos) {
+  const corpoTabela = document.getElementById("corpo-tabela-eventos");
+  corpoTabela.innerHTML = ""; // Limpa a tabela antes de adicionar novos eventos
+
+  if (eventos.length === 0) {
+    corpoTabela.innerHTML = "<tr><td colspan='3'>Nenhum evento encontrado para esta data.</td></tr>";
+  } else {
+    eventos.forEach(evento => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${evento.data}</td>
+        <td>${evento.vaga}</td>
+        <td>${evento.turno}</td>
+      `;
+      corpoTabela.appendChild(tr);
+    });
   }
 }
 
@@ -104,42 +113,13 @@ function mudarMes(direcao) {
   carregarCalendario();
 }
 
-function adicionarEventoNaTabela(data, descricao) {
-  const corpoTabela = document.getElementById("corpo-tabela-eventos");
-  corpoTabela.innerHTML = "";
-
-  // Detecta se está na página do participante
-  const ehParticipante = window.location.pathname.includes("calendario-participante.html");
-
-  if (Array.isArray(descricao)) {
-    descricao.forEach(desc => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${formatarData(data)}</td>
-        <td>${desc}</td>
-        ${ehParticipante ? `<td><button onclick="participar('${data}', '${desc}')">Tenho interesse</button></td>` : ""}
-      `;
-      corpoTabela.appendChild(tr);
-    });
-  } else {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-      <td>${formatarData(data)}</td>
-      <td>${descricao}</td>
-      ${ehParticipante ? `<td><button onclick="participar('${data}', '${descricao}')">Tenho interesse</button></td>` : ""}
-    `;
-    corpoTabela.appendChild(tr);
-  }
-}
-
-
 function formatarData(dataStr) {
   const [ano, mes, dia] = dataStr.split("-");
   return `${dia}/${mes}`;
 }
 
 function sair() {
-  window.location.href = "login.html";
+  window.location.href = "login.php";
 }
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -310,28 +290,62 @@ document.getElementById("form-candidatura").addEventListener("submit", function 
   document.getElementById("formulario-candidatura").style.display = "none";
 });
 
-// Adicionar eventos na tabela (exemplo)
+
+// Função para exibir o formulário de adicionar evento
+function exibirFormularioAdicionarEvento(data) {
+  // Exibe o formulário
+  const form = document.getElementById("formulario-evento");
+  form.style.display = "block";
+
+  // Preenche o campo de data automaticamente
+  document.getElementById("data").value = data;
+
+  // Faz o formulário rolar até o topo
+  form.scrollIntoView({ behavior: "smooth" });
+}
+
+// Função para adicionar evento na tabela de eventos
 function adicionarEventoNaTabela(data, descricao) {
   const corpoTabela = document.getElementById("corpo-tabela-eventos");
   corpoTabela.innerHTML = "";
 
-  if (Array.isArray(descricao)) {
-    descricao.forEach(evento => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${formatarData(data)}</td>
-        <td>${evento}</td>
-        <td><button onclick="candidatar('${data}', '${evento}')">Quero Participar</button></td>
-      `;
-      corpoTabela.appendChild(tr);
-    });
-  } else {
+  descricao.forEach((desc) => {
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${formatarData(data)}</td>
-      <td>${descricao}</td>
-      <td><button onclick="candidatar('${data}', '${descricao}')">Quero Participar</button></td>
+      <td>${desc}</td>
     `;
     corpoTabela.appendChild(tr);
-  }
+  });
 }
+
+
+// Envio do formulário para salvar o evento no banco de dados
+document.getElementById("form-cadastro").addEventListener("submit", function (e) {
+  e.preventDefault(); // Evita o comportamento padrão de envio
+
+  const data = document.getElementById("data").value;
+  const vaga = document.getElementById("evento").value;
+  const turno = document.getElementById("turno").value;
+
+  // Envia os dados do formulário para o arquivo PHP
+  const formData = new FormData();
+  formData.append('data_evento', data);
+  formData.append('vaga_evento', vaga);
+  formData.append('turno_evento', turno);
+
+  fetch('salvar_evento.php', {
+    method: 'POST',
+    body: formData
+  })
+  .then(response => response.text())
+  .then(data => {
+    alert("Evento adicionado com sucesso!");
+    // Após o envio, recarregar o calendário para refletir o novo evento
+    carregarCalendario();
+    document.getElementById("formulario-evento").style.display = "none";
+  })
+  .catch(error => {
+    console.error("Erro ao adicionar evento: ", error);
+  });
+});

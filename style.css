@@ -6,16 +6,6 @@ body {
   
 }
 
-/* torna a área principal branca */
-.layout {
-  position: relative;
-  background-image: url('/Imagens/imgarena.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: flex;
-  background-color: white;
-}
 
 /* Camada semi-transparente sobre o background */
 .layout::before {
@@ -34,7 +24,7 @@ body {
 
 /* LOGIN */
 .login-container {
-  background-image: url('/Imagens/imgarena.jpg');
+  background-image: url('http://localhost/meu-projeto/Projeto%20Integrador/Imagens/imgarena.jpg');
   background-position: no-repeat;
   background-position: center;
   background-size: cover;
