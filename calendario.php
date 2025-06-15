@@ -13,7 +13,6 @@
 
   <div class="layout">
     <nav class="menu-lateral">
-      <br> </br>
       <h3>Menu</h3>
       <ul>
         <li><a href="index.php"> </a></li>
@@ -43,8 +42,6 @@
           </table>  
         </div>
 
-        
-
         <!-- Bloco 2: Calendário -->
         <div class="container-calendario">
           <div class="controle-mes">
@@ -59,39 +56,46 @@
             <button id="botao-toggle-form" onclick="toggleFormularioEvento()" class="botao-mais">+</button>
           </div>
         </div>  
-          <div class="form-wrapper" id="formulario-evento" style="display: none;">
-  <h3>Adicionar Novo Evento</h3>
-  <form id="form-cadastro" class="form-evento" method="POST">
-    <label for="evento">Nome do Evento:</label>
-    <select id="evento" name="evento" required>
-      <option value="Cozinha">Cozinha</option>
-      <option value="Segurança">Segurança</option>
-      <option value="Caixa">Caixa</option>
-      <option value="Limpeza">Limpeza</option>
-    </select>
 
-    <label for="data">Data do Evento:</label>
-    <input type="date" id="data" name="data" required>
+        <!-- Formulário de Lançamento de Evento -->
+        <div class="form-wrapper" id="formulario-evento" style="display: none;">
+          <h3>Adicionar Novo Evento</h3>
+          <form id="form-cadastro" class="form-evento" method="POST" action="salvar_evento.php">
+            <label for="evento">Nome do Evento:</label>
+            <select id="evento" name="evento" required>
+              <option value="Cozinha">Cozinha</option>
+              <option value="Segurança">Segurança</option>
+              <option value="Caixa">Caixa</option>
+              <option value="Limpeza">Limpeza</option>
+            </select>
 
-    <label for="vagas">Quantidade de Vagas:</label>
-    <select id="vagas" name="vagas" required>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-    </select>
+            <label for="data">Data do Evento:</label>
+            <input type="date" id="data" name="data" required>
 
-    <label for="turno">Selecione o turno:</label>
-    <select id="turno" name="turno" required>
-      <option value="Manhã">Manhã</option>
-      <option value="Tarde">Tarde</option>
-      <option value="O dia todo">O dia todo</option>
-    </select>
+            <label for="vagas">Quantidade de Vagas:</label>
+            <select id="vagas" name="vagas" required>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
 
-    <button type="submit">Adicionar Evento</button>
-  </form>
-</div>
+            <label for="turno">Selecione o turno:</label>
+            <select id="turno" name="turno" required>
+              <option value="Manhã">Manhã</option>
+              <option value="Tarde">Tarde</option>
+              <option value="O dia todo">O dia todo</option>
+            </select>
+
+            <button type="submit">Adicionar Evento</button>
+          </form>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>

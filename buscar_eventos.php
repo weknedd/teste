@@ -14,10 +14,10 @@ if ($conn->connect_error) {
 }
 
 // Recebendo a data via GET
-$data = $_GET['data']; // Exemplo: "2025-05-05"
+$data = $_GET['data'];
 
 // Consulta para buscar eventos pela data
-$sql = "SELECT * FROM eventos WHERE data = '$data'"; // Ajuste o nome da tabela e coluna conforme necessário
+$sql = "SELECT * FROM eventos WHERE data = '$data'";
 $result = $conn->query($sql);
 
 $eventos = [];

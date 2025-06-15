@@ -23,7 +23,7 @@ function entrar(event) {
 }
 
 // Variáveis globais de controle de mês
-let mesAtual = 4;
+let mesAtual = 5;
 let anoAtual = 2025;
 
 const nomesMeses = [
@@ -32,11 +32,12 @@ const nomesMeses = [
 ];
 
 // Função para carregar o calendário com os eventos
+// Função para carregar o calendário com os eventos
 function carregarCalendario() {
   const calendario = document.getElementById("calendario");
-  calendario.innerHTML = "";
+  calendario.innerHTML = ""; // Limpa o conteúdo do calendário
 
-  document.getElementById("titulo-mes").textContent = `${nomesMeses[mesAtual]} ${anoAtual}`;
+  document.getElementById("titulo-mes").textContent = `${nomesMeses[mesAtual]} ${anoAtual}`; // Atualiza o título do mês
 
   const diasSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
   diasSemana.forEach(dia => {
@@ -46,8 +47,8 @@ function carregarCalendario() {
     calendario.appendChild(div);
   });
 
-  const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
-  const totalDias = new Date(anoAtual, mesAtual + 1, 0).getDate();
+  const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay(); // Primeiro dia do mês
+  const totalDias = new Date(anoAtual, mesAtual + 1, 0).getDate(); // Total de dias do mês
 
   for (let i = 0; i < primeiroDia; i++) {
     calendario.appendChild(document.createElement("div"));
@@ -57,17 +58,68 @@ function carregarCalendario() {
     const div = document.createElement("div");
     div.className = "dia";
 
-    const dataStr = `${anoAtual}-${(mesAtual + 1).toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}`;
+    const dataStr = `${anoAtual}-${(mesAtual + 1).toString().padStart(2, "0")}-${dia.toString().padStart(2, "0")}`; // Formato de data
     div.innerHTML = `<div>${dia}</div>`;
 
+    // Verifica se o dia tem algum evento
+    fetch(`buscar_eventos.php?data=${dataStr}`)
+      .then(response => response.json())
+      .then(eventos => {
+        if (eventos.length > 0) {
+          div.style.backgroundColor = "#FF7417";  // Verde
+          div.style.color = "white"; // Muda a cor do texto para branco
+        }
+      })
+      .catch(error => console.error("Erro ao buscar eventos:", error));
+
     div.addEventListener("click", function() {
-      // Quando o usuário clica em um dia, chama a função para buscar os eventos
-      buscarEventos(dataStr);
+      buscarEventos(dataStr); // Buscar eventos para o dia selecionado
     });
 
     calendario.appendChild(div);
   }
 }
+
+function buscarEventos(data) {
+  // Faz a requisição para o PHP para buscar os eventos
+  fetch(`buscar_eventos.php?data=${data}`)
+    .then(response => response.json())
+    .then(eventos => {
+      if (eventos.length > 0) {
+        // Exibir eventos encontrados
+        adicionarEventoNaTabela(data, eventos);
+      } else {
+        alert("Nenhum evento encontrado para esta data.");
+      }
+    })
+    .catch(error => console.error("Erro ao buscar eventos:", error));
+}
+
+function adicionarEventoNaTabela(data, eventos) {
+  const corpoTabela = document.getElementById("corpo-tabela-eventos");
+  corpoTabela.innerHTML = ""; // Limpa a tabela antes de adicionar novos eventos
+
+  eventos.forEach(evento => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${formatarData(data)}</td>
+      <td>${evento.vaga}</td>
+      <td>${evento.turno}</td>
+    `;
+    corpoTabela.appendChild(tr);
+  });
+}
+
+function formatarData(dataStr) {
+  const [ano, mes, dia] = dataStr.split("-");
+  return `${dia}/${mes}`;
+}
+
+window.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("calendario")) {
+    carregarCalendario();
+  }
+});
 
 function buscarEventos(data) {
   // Faz uma requisição AJAX para buscar os eventos do banco
@@ -349,3 +401,27 @@ document.getElementById("form-cadastro").addEventListener("submit", function (e)
     console.error("Erro ao adicionar evento: ", error);
   });
 });
+
+function carregarEventos() {
+  const corpoTabela = document.getElementById("corpo-tabela-eventos");
+  corpoTabela.innerHTML = ""; // Limpar a tabela antes de adicionar novos eventos
+
+  eventos.forEach(evento => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${evento.data}</td>
+      <td>${evento.vaga}</td>
+      <td>${evento.turno}</td>
+      <td><button onclick="participar('${evento.data}', '${evento.vaga}')">Eu Quero</button></td>
+    `;
+    corpoTabela.appendChild(tr);
+  });
+}
+
+// Função de participação
+function participar(data, vaga) {
+  alert(`Você se candidatou para o evento de ${vaga} no dia ${data}.`);
+}
+
+// Carregar eventos na página
+window.addEventListener("DOMContentLoaded", carregarEventos);

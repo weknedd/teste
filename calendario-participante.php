@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Calendário - Participante</title>
-  <link rel="icon" type="image/png" href="icone.png">
+  <link rel="icon" type="image/png" href="logo.jpg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -32,10 +32,13 @@
               <tr>
                 <th>Data</th>
                 <th>Vaga</th>
+                <th>Turno</th>
                 <th>Ação</th>
               </tr>
             </thead>
-            <tbody id="corpo-tabela-eventos"></tbody>
+            <tbody id="corpo-tabela-eventos">
+              <!-- Os dados da tabela serão inseridos dinamicamente com JS -->
+            </tbody>
           </table>
         </div>
 
@@ -45,7 +48,6 @@
             <button onclick="mudarMes(-1)">◀</button>
             <h2 id="titulo-mes">Março 2025</h2>
             <button onclick="mudarMes(1)">▶</button>
-            
           </div>
 
           <div class="calendario" id="calendario"></div>
